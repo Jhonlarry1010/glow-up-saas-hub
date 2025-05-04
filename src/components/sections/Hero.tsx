@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 export function Hero() {
   return (
@@ -26,8 +27,8 @@ export function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="font-medium">
-              Start for free
+            <Button size="lg" className="font-medium" asChild>
+              <Link to="/get-started">Start for free</Link>
             </Button>
             <Button size="lg" variant="outline" className="font-medium">
               Book a demo
