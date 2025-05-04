@@ -1,6 +1,7 @@
 
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
