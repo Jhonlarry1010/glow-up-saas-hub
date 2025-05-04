@@ -24,9 +24,9 @@ export function Header() {
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
-            <Link to="#features" className="text-sm font-medium hover:text-primary transition-colors">Features</Link>
-            <Link to="#pricing" className="text-sm font-medium hover:text-primary transition-colors">Pricing</Link>
-            <Link to="#testimonials" className="text-sm font-medium hover:text-primary transition-colors">Testimonials</Link>
+            <Link to="/#features" className="text-sm font-medium hover:text-primary transition-colors">Features</Link>
+            <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors">Pricing</Link>
+            <Link to="/#testimonials" className="text-sm font-medium hover:text-primary transition-colors">Testimonials</Link>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -48,9 +48,9 @@ export function Header() {
           <div className="md:hidden py-4 animate-fade-in">
             <div className="flex flex-col space-y-4">
               <Link to="/" className="text-sm font-medium hover:text-primary transition-colors py-2">Home</Link>
-              <Link to="#features" className="text-sm font-medium hover:text-primary transition-colors py-2">Features</Link>
-              <Link to="#pricing" className="text-sm font-medium hover:text-primary transition-colors py-2">Pricing</Link>
-              <Link to="#testimonials" className="text-sm font-medium hover:text-primary transition-colors py-2">Testimonials</Link>
+              <Link to="/#features" className="text-sm font-medium hover:text-primary transition-colors py-2">Features</Link>
+              <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors py-2">Pricing</Link>
+              <Link to="/#testimonials" className="text-sm font-medium hover:text-primary transition-colors py-2">Testimonials</Link>
               <div className="flex flex-col space-y-2 pt-2">
                 <Button variant="ghost" size="sm" className="justify-center">Log in</Button>
                 <Button size="sm" className="justify-center">Get started</Button>
