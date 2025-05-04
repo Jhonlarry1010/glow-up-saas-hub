@@ -1,6 +1,6 @@
 
 import { Container } from "@/components/ui/Container";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/badge";
 import { Check, Code, BarChart, Users, Shield, Zap } from "lucide-react";
 
 const features = [
