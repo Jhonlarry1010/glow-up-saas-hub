@@ -11,6 +11,7 @@ import {
   DialogTrigger 
 } from "@/components/ui/dialog";
 import { Package, Layout, Smartphone } from "lucide-react";
+import HeroScene from "../3d/HeroScene";
 
 export function Hero() {
   return (
@@ -83,12 +84,9 @@ export function Hero() {
           
           <div className="mt-16 relative">
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 bottom-0 h-20" />
-            <div className="relative z-0 rounded-lg border border-border/80 shadow-lg overflow-hidden float-animation">
-              <img 
-                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" 
-                alt="SaaSHub Dashboard" 
-                className="w-full h-auto"
-              />
+            {/* Replaced static image with 3D scene */}
+            <div className="relative z-0 overflow-hidden">
+              <HeroScene />
             </div>
           </div>
           
