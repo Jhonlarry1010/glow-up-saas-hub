@@ -3,6 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogTrigger 
+} from "@/components/ui/dialog";
+import { Package, Layout, Smartphone } from "lucide-react";
 
 export function Hero() {
   return (
@@ -27,9 +35,47 @@ export function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="font-medium" asChild>
-              <Link to="/get-started">Start for free</Link>
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button size="lg" className="font-medium">
+                  Start for free
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl mb-4">What would you like to get started with?</DialogTitle>
+                </DialogHeader>
+                <div className="grid gap-4 pt-4">
+                  <Button className="flex justify-start gap-3 h-auto py-4" variant="outline" asChild>
+                    <Link to="/templates">
+                      <Layout className="h-5 w-5" />
+                      <div className="flex flex-col items-start">
+                        <span className="font-medium">Buy Templates</span>
+                        <span className="text-sm text-muted-foreground">Pre-designed templates for various projects</span>
+                      </div>
+                    </Link>
+                  </Button>
+                  <Button className="flex justify-start gap-3 h-auto py-4" variant="outline" asChild>
+                    <Link to="/websites">
+                      <Package className="h-5 w-5" />
+                      <div className="flex flex-col items-start">
+                        <span className="font-medium">Buy Websites</span>
+                        <span className="text-sm text-muted-foreground">Ready-to-use website solutions</span>
+                      </div>
+                    </Link>
+                  </Button>
+                  <Button className="flex justify-start gap-3 h-auto py-4" variant="outline" asChild>
+                    <Link to="/apps">
+                      <Smartphone className="h-5 w-5" />
+                      <div className="flex flex-col items-start">
+                        <span className="font-medium">Buy Apps</span>
+                        <span className="text-sm text-muted-foreground">Mobile and web applications</span>
+                      </div>
+                    </Link>
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
             <Button size="lg" variant="outline" className="font-medium">
               Book a demo
             </Button>
