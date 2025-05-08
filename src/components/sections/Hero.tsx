@@ -11,6 +11,7 @@ import {
   DialogTrigger 
 } from "@/components/ui/dialog";
 import { Package, Layout, Smartphone } from "lucide-react";
+import { Suspense } from "react";
 import HeroScene from "../3d/HeroScene";
 
 export function Hero() {
@@ -86,7 +87,9 @@ export function Hero() {
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 bottom-0 h-20" />
             {/* 3D scene */}
             <div className="relative z-0">
-              <HeroScene />
+              <Suspense fallback={<div className="w-full h-[400px] bg-muted/30 animate-pulse rounded-lg"></div>}>
+                <HeroScene />
+              </Suspense>
             </div>
           </div>
           

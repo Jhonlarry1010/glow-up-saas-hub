@@ -1,5 +1,5 @@
 
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -58,6 +58,29 @@ function Torus(props: JSX.IntrinsicElements["mesh"]) {
   );
 }
 
+// Scene component to handle the actual 3D elements
+function Scene() {
+  return (
+    <>
+      <color attach="background" args={["#f8f9fa"]} />
+      <ambientLight intensity={0.5} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} />
+      
+      <Torus position={[-2, 0, 0]} />
+      <Box position={[0, 0, 0]} />
+      <Sphere position={[2, 0, 0]} />
+      
+      <OrbitControls 
+        enableZoom={false} 
+        enablePan={false} 
+        autoRotate 
+        autoRotateSpeed={0.5} 
+      />
+    </>
+  );
+}
+
 export default function HeroScene() {
   return (
     <div className="w-full h-[400px] rounded-lg overflow-hidden border border-border/80 shadow-lg">
@@ -67,21 +90,9 @@ export default function HeroScene() {
         gl={{ antialias: true }}
         dpr={[1, 2]}
       >
-        <color attach="background" args={["#f8f9fa"]} />
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
-        
-        <Torus position={[-2, 0, 0]} />
-        <Box position={[0, 0, 0]} />
-        <Sphere position={[2, 0, 0]} />
-        
-        <OrbitControls 
-          enableZoom={false} 
-          enablePan={false} 
-          autoRotate 
-          autoRotateSpeed={0.5} 
-        />
+        <Suspense fallback={null}>
+          <Scene />
+        </Suspense>
       </Canvas>
     </div>
   );
