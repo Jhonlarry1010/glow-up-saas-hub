@@ -84,8 +84,8 @@ export function Hero() {
           
           <div className="mt-16 relative">
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 bottom-0 h-20" />
-            {/* Replaced static image with 3D scene */}
-            <div className="relative z-0 overflow-hidden">
+            {/* 3D scene */}
+            <div className="relative z-0">
               <HeroScene />
             </div>
           </div>

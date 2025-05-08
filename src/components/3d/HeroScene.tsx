@@ -1,19 +1,21 @@
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 function Box(props: JSX.IntrinsicElements["mesh"]) {
-  const ref = useRef<THREE.Mesh>(null!);
+  const mesh = useRef<THREE.Mesh>(null!);
   
   useFrame((state, delta) => {
-    ref.current.rotation.x += delta * 0.2;
-    ref.current.rotation.y += delta * 0.3;
+    if (mesh.current) {
+      mesh.current.rotation.x += delta * 0.2;
+      mesh.current.rotation.y += delta * 0.3;
+    }
   });
   
   return (
-    <mesh {...props} ref={ref} castShadow receiveShadow>
+    <mesh {...props} ref={mesh} castShadow receiveShadow>
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color="#6366f1" />
     </mesh>
@@ -21,15 +23,17 @@ function Box(props: JSX.IntrinsicElements["mesh"]) {
 }
 
 function Sphere(props: JSX.IntrinsicElements["mesh"]) {
-  const ref = useRef<THREE.Mesh>(null!);
+  const mesh = useRef<THREE.Mesh>(null!);
   
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta * 0.15;
-    ref.current.rotation.z += delta * 0.25;
+    if (mesh.current) {
+      mesh.current.rotation.x -= delta * 0.15;
+      mesh.current.rotation.z += delta * 0.25;
+    }
   });
   
   return (
-    <mesh {...props} ref={ref} castShadow>
+    <mesh {...props} ref={mesh} castShadow>
       <sphereGeometry args={[0.7, 32, 32]} />
       <meshStandardMaterial color="#0ea5e9" metalness={0.5} roughness={0.3} />
     </mesh>
@@ -37,17 +41,19 @@ function Sphere(props: JSX.IntrinsicElements["mesh"]) {
 }
 
 function Torus(props: JSX.IntrinsicElements["mesh"]) {
-  const ref = useRef<THREE.Mesh>(null!);
+  const mesh = useRef<THREE.Mesh>(null!);
   
   useFrame((state, delta) => {
-    ref.current.rotation.y += delta * 0.3;
-    ref.current.rotation.z -= delta * 0.2;
+    if (mesh.current) {
+      mesh.current.rotation.y += delta * 0.3;
+      mesh.current.rotation.z -= delta * 0.2;
+    }
   });
   
   return (
-    <mesh {...props} ref={ref} castShadow>
+    <mesh {...props} ref={mesh} castShadow>
       <torusGeometry args={[1, 0.3, 16, 100]} />
-      <meshStandardMaterial color="#8b5cf6" wireframe={false} metalness={0.3} roughness={0.4} />
+      <meshStandardMaterial color="#8b5cf6" metalness={0.3} roughness={0.4} />
     </mesh>
   );
 }
@@ -55,7 +61,13 @@ function Torus(props: JSX.IntrinsicElements["mesh"]) {
 export default function HeroScene() {
   return (
     <div className="w-full h-[400px] rounded-lg overflow-hidden border border-border/80 shadow-lg">
-      <Canvas shadows camera={{ position: [0, 0, 5], fov: 50 }}>
+      <Canvas 
+        camera={{ position: [0, 0, 5], fov: 50 }}
+        shadows
+        gl={{ antialias: true }}
+        dpr={[1, 2]}
+      >
+        <color attach="background" args={["#f8f9fa"]} />
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
         <pointLight position={[-10, -10, -10]} intensity={0.5} />
