@@ -17,8 +17,8 @@ export function Header() {
       <Container>
         <nav className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">S</div>
-            <span className="text-xl font-bold">SaaSHub</span>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">C</div>
+            <span className="text-xl font-bold">Cartwheel</span>
           </Link>
 
           {/* Desktop navigation */}

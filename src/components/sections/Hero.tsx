@@ -27,7 +27,7 @@ export function Hero() {
           <Badge className="mb-6">New Features Available</Badge>
           
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            Streamline Your Workflow with <span className="gradient-text">SaaSHub</span>
+            Streamline Your Workflow with <span className="gradient-text">Cartwheel</span>
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground mb-10">

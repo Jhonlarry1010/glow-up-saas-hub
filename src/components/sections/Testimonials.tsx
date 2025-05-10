@@ -5,25 +5,25 @@ import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
-    quote: "SaaSHub has completely transformed how our team works. We've cut our project delivery time by half and improved collaboration across departments.",
+    quote: "Cartwheel has completely transformed how our team works. We've cut our project delivery time by half and improved collaboration across departments.",
     name: "Alex Johnson",
     title: "CTO, TechVision Inc.",
     avatar: "A",
   },
   {
-    quote: "The analytics tools in SaaSHub helped us identify key areas for improvement in our workflow. The ROI has been incredible.",
+    quote: "The analytics tools in Cartwheel helped us identify key areas for improvement in our workflow. The ROI has been incredible.",
     name: "Sarah Martinez",
     title: "Operations Director, Innovate Co.",
     avatar: "S",
   },
   {
-    quote: "I was skeptical at first, but after just one month using SaaSHub, our productivity metrics improved dramatically. The interface is intuitive and the support team is exceptional.",
+    quote: "I was skeptical at first, but after just one month using Cartwheel, our productivity metrics improved dramatically. The interface is intuitive and the support team is exceptional.",
     name: "Michael Chen",
     title: "Product Manager, GrowthLabs",
     avatar: "M",
   },
   {
-    quote: "SaaSHub's integration capabilities allowed us to connect all our existing tools. The onboarding process was smooth, and we were up and running in no time.",
+    quote: "Cartwheel's integration capabilities allowed us to connect all our existing tools. The onboarding process was smooth, and we were up and running in no time.",
     name: "Jessica Taylor",
     title: "Head of Engineering, DataFlow Systems",
     avatar: "J",
@@ -68,7 +68,7 @@ export function Testimonials() {
           <div className="md:flex items-center justify-between">
             <div className="mb-6 md:mb-0 md:mr-8">
               <h3 className="text-2xl font-bold mb-4">Ready to transform your workflow?</h3>
-              <p className="text-lg">Join thousands of satisfied customers who have streamlined their processes with SaaSHub.</p>
+              <p className="text-lg">Join thousands of satisfied customers who have streamlined their processes with Cartwheel.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="font-medium">
