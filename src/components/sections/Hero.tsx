@@ -83,7 +83,8 @@ export function Hero() {
           </div>
           
           <div className="mt-16 relative">
-            <style jsx>{`
+            <style>
+              {`
               @keyframes spin-slow {
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
@@ -101,7 +102,8 @@ export function Hero() {
               .perspective-1000 {
                 perspective: 1000px;
               }
-            `}</style>
+              `}
+            </style>
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 bottom-0 h-20" />
             <HeroScene />
           </div>
