@@ -83,6 +83,25 @@ export function Hero() {
           </div>
           
           <div className="mt-16 relative">
+            <style jsx>{`
+              @keyframes spin-slow {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+              @keyframes reverse-spin-slow {
+                from { transform: rotate(360deg); }
+                to { transform: rotate(0deg); }
+              }
+              .animate-spin-slow {
+                animation: spin-slow 20s linear infinite;
+              }
+              .animate-reverse-spin-slow {
+                animation: reverse-spin-slow 15s linear infinite;
+              }
+              .perspective-1000 {
+                perspective: 1000px;
+              }
+            `}</style>
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 bottom-0 h-20" />
             <HeroScene />
           </div>

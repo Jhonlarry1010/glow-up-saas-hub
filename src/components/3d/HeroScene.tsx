@@ -1,108 +1,125 @@
 
 import { useRef, useEffect, useState } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 
-function Box(props) {
-  const meshRef = useRef();
+function AnimatedBox() {
+  const boxRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!meshRef.current) return;
+    if (!boxRef.current) return;
     
-    let animationFrameId;
+    let animationFrameId: number;
+    let rotation = 0;
+    
     const animate = () => {
-      if (meshRef.current) {
-        meshRef.current.rotation.x += 0.01;
-        meshRef.current.rotation.y += 0.01;
+      rotation += 2;
+      if (boxRef.current) {
+        boxRef.current.style.transform = `rotateY(${rotation}deg) rotateX(${rotation / 2}deg)`;
       }
       animationFrameId = requestAnimationFrame(animate);
     };
     
     animate();
     
-    // Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
   
   return (
-    <mesh ref={meshRef} position={[0, 0, 0]} {...props}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#6366f1" />
-    </mesh>
+    <div 
+      ref={boxRef} 
+      className="w-16 h-16 bg-primary/90 rounded-lg shadow-lg"
+      style={{ transformStyle: 'preserve-3d', transition: 'transform 0.1s ease' }}
+    />
   );
 }
 
-function Sphere(props) {
-  const meshRef = useRef();
+function AnimatedSphere() {
+  const sphereRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!meshRef.current) return;
+    if (!sphereRef.current) return;
     
-    let animationFrameId;
+    let animationFrameId: number;
+    let rotation = 45;
+    
     const animate = () => {
-      if (meshRef.current) {
-        meshRef.current.rotation.x += 0.01;
-        meshRef.current.rotation.z += 0.01;
+      rotation += 1.5;
+      if (sphereRef.current) {
+        sphereRef.current.style.transform = `rotateZ(${rotation}deg) rotateX(${rotation / 3}deg)`;
       }
       animationFrameId = requestAnimationFrame(animate);
     };
     
     animate();
     
-    // Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
   
   return (
-    <mesh ref={meshRef} position={[2, 0, 0]} {...props}>
-      <sphereGeometry args={[0.7, 32, 32]} />
-      <meshStandardMaterial color="#0ea5e9" metalness={0.5} roughness={0.3} />
-    </mesh>
+    <div 
+      ref={sphereRef} 
+      className="w-14 h-14 bg-cyan-500/90 rounded-full shadow-lg"
+      style={{ transformStyle: 'preserve-3d', transition: 'transform 0.1s ease' }}
+    />
   );
 }
 
-function Torus(props) {
-  const meshRef = useRef();
+function AnimatedTorus() {
+  const torusRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    if (!meshRef.current) return;
+    if (!torusRef.current) return;
     
-    let animationFrameId;
+    let animationFrameId: number;
+    let rotation = 90;
+    
     const animate = () => {
-      if (meshRef.current) {
-        meshRef.current.rotation.y += 0.01;
-        meshRef.current.rotation.z += 0.01;
+      rotation += 1.8;
+      if (torusRef.current) {
+        torusRef.current.style.transform = `rotateY(${rotation}deg) rotateZ(${rotation / 4}deg)`;
       }
       animationFrameId = requestAnimationFrame(animate);
     };
     
     animate();
     
-    // Cleanup
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
   
   return (
-    <mesh ref={meshRef} position={[-2, 0, 0]} {...props}>
-      <torusGeometry args={[0.8, 0.3, 16, 100]} />
-      <meshStandardMaterial color="#8b5cf6" metalness={0.3} roughness={0.4} />
-    </mesh>
+    <div className="relative w-16 h-16 flex items-center justify-center">
+      <div 
+        ref={torusRef} 
+        className="absolute w-16 h-16 bg-transparent border-4 border-purple-500 rounded-full shadow-lg"
+        style={{ transformStyle: 'preserve-3d', transition: 'transform 0.1s ease' }}
+      >
+        <div className="absolute inset-0 bg-transparent border-4 border-purple-500 rounded-full transform rotate-45"></div>
+      </div>
+    </div>
   );
 }
 
 export default function HeroScene() {
-  const [canvasLoaded, setCanvasLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="w-full h-[400px] rounded-lg overflow-hidden border border-border/20 shadow-lg">
-      {/* Fallback shown until Canvas is loaded */}
-      {!canvasLoaded && (
+    <div className="w-full h-[400px] rounded-lg overflow-hidden border border-border/20 shadow-lg relative">
+      {/* Fallback shown until loaded */}
+      {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg">
           <div className="text-center">
             <div className="text-4xl font-bold gradient-text mb-2">SaaSHub</div>
@@ -111,19 +128,34 @@ export default function HeroScene() {
         </div>
       )}
       
-      <Canvas
-        onCreated={() => setCanvasLoaded(true)} 
-        camera={{ position: [0, 0, 10], fov: 25 }}
-        style={{ background: 'transparent' }}
+      {/* CSS-based 3D scene */}
+      <div 
+        className={`absolute inset-0 bg-gradient-to-br from-slate-900/95 to-slate-800/95 flex items-center justify-center perspective-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ perspective: '1000px', transition: 'opacity 0.5s ease-in-out' }}
       >
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
-        <Box />
-        <Sphere />
-        <Torus />
-        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-      </Canvas>
+        <div className="relative w-full h-full flex items-center justify-center">
+          {/* Orbit effect */}
+          <div className="absolute w-64 h-64 animate-spin-slow flex items-center justify-center">
+            <div className="absolute left-0">
+              <AnimatedSphere />
+            </div>
+          </div>
+          
+          <div className="absolute w-80 h-80 animate-reverse-spin-slow flex items-center justify-center">
+            <div className="absolute right-0">
+              <AnimatedTorus />
+            </div>
+          </div>
+          
+          <AnimatedBox />
+          
+          {/* Decorative elements */}
+          <div className="absolute inset-0 overflow-hidden opacity-20">
+            <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-500/30 rounded-full blur-xl"></div>
+            <div className="absolute bottom-10 right-10 w-32 h-32 bg-purple-500/30 rounded-full blur-xl"></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
