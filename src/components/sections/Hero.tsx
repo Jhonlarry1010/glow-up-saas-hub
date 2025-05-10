@@ -11,6 +11,7 @@ import {
   DialogTrigger 
 } from "@/components/ui/dialog";
 import { Package, Layout, Smartphone } from "lucide-react";
+import HeroScene from "@/components/3d/HeroScene";
 
 export function Hero() {
   return (
@@ -83,13 +84,7 @@ export function Hero() {
           
           <div className="mt-16 relative">
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 bottom-0 h-20" />
-            {/* Visual placeholder instead of 3D scene */}
-            <div className="relative z-0 w-full h-[400px] bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-4xl font-bold gradient-text mb-2">SaaSHub</div>
-                <p className="text-muted-foreground">Streamline your workflow</p>
-              </div>
-            </div>
+            <HeroScene />
           </div>
           
           <div className="mt-12 flex flex-wrap justify-center gap-x-6 gap-y-4">
