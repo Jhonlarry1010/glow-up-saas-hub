@@ -21,7 +21,7 @@ const websites = [
     title: "Cartwheel Business",
     category: "Business",
     description: "A professional business website template with team profiles, services, and contact forms.",
-    image: "https://images.unsplash.com/photo-1616763355548-1b606f439f86?auto=format&fit=crop&w=600&q=80",
+    image: "https://media.macphun.com/img/uploads/customer/blog/2103/1684418771646630d3a2bb60.04823118.jpg?q=85&w=840",
     price: 299,
     rating: 4.9,
     sales: 320,
