@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/Container";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Link as LinkIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export function Header() {
@@ -26,12 +26,18 @@ export function Header() {
             <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
             <Link to="/#features" className="text-sm font-medium hover:text-primary transition-colors">Features</Link>
             <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors">Pricing</Link>
+            <Link to="/websites" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
+              <LinkIcon size={16} />
+              Websites
+            </Link>
             <Link to="/#testimonials" className="text-sm font-medium hover:text-primary transition-colors">Testimonials</Link>
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost" size="sm">Log in</Button>
-            <Button size="sm">Get started</Button>
+            <Button size="sm" asChild>
+              <Link to="/websites">Buy website</Link>
+            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -50,10 +56,16 @@ export function Header() {
               <Link to="/" className="text-sm font-medium hover:text-primary transition-colors py-2">Home</Link>
               <Link to="/#features" className="text-sm font-medium hover:text-primary transition-colors py-2">Features</Link>
               <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors py-2">Pricing</Link>
+              <Link to="/websites" className="text-sm font-medium hover:text-primary transition-colors py-2 flex items-center gap-1">
+                <LinkIcon size={16} />
+                Websites
+              </Link>
               <Link to="/#testimonials" className="text-sm font-medium hover:text-primary transition-colors py-2">Testimonials</Link>
               <div className="flex flex-col space-y-2 pt-2">
                 <Button variant="ghost" size="sm" className="justify-center">Log in</Button>
-                <Button size="sm" className="justify-center">Get started</Button>
+                <Button size="sm" className="justify-center" asChild>
+                  <Link to="/websites">Buy website</Link>
+                </Button>
               </div>
             </div>
           </div>

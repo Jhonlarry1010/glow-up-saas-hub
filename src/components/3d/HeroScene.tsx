@@ -1,20 +1,20 @@
 
-import { useState, useEffect } from 'react';
+import { useRef, useEffect, useState } from "react";
 
 export default function HeroScene() {
   const [canvasLoaded, setCanvasLoaded] = useState(false);
-
+  
   useEffect(() => {
-    // Simulate loading delay
+    // Simulate canvas loading
     const timer = setTimeout(() => {
       setCanvasLoaded(true);
-    }, 500);
+    }, 1000);
     
     return () => clearTimeout(timer);
   }, []);
-
+  
   return (
-    <div className="w-full h-[400px] rounded-lg overflow-hidden border border-border/20 shadow-lg relative">
+    <div className="w-full h-[400px] rounded-lg overflow-hidden border border-border/20 shadow-lg">
       {!canvasLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg">
           <div className="text-center">
@@ -24,65 +24,65 @@ export default function HeroScene() {
         </div>
       )}
       
-      <div className={`w-full h-full flex items-center justify-center perspective-1000 ${canvasLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
-        <div className="relative">
-          {/* Box */}
-          <div className="absolute left-0 top-0 w-32 h-32 animate-spin-slow">
-            <div className="w-full h-full transform-style-3d">
-              <div className="absolute inset-0 bg-primary/80 transform translate-z-16"></div>
-              <div className="absolute inset-0 bg-primary/90 transform -translate-z-16"></div>
-              <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-primary/70 transform rotate-y-90 translate-z-16"></div>
-              <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-primary/70 transform -rotate-y-90 -translate-z-16"></div>
-              <div className="absolute top-0 left-0 right-0 bottom-0 h-full w-full bg-primary/80 transform rotate-x-90 translate-z-16"></div>
-              <div className="absolute top-0 left-0 right-0 bottom-0 h-full w-full bg-primary/80 transform -rotate-x-90 -translate-z-16"></div>
-            </div>
-          </div>
-          
-          {/* Sphere */}
-          <div className="absolute -right-16 top-8 w-24 h-24 animate-reverse-spin-slow">
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-secondary/80 to-secondary/40 shadow-lg"></div>
-          </div>
-          
-          {/* Torus */}
-          <div className="absolute -left-20 bottom-0 w-32 h-32 animate-spin-slow">
-            <div className="w-full h-full rounded-full border-8 border-secondary/80 transform rotate-45"></div>
+      <div className="w-full h-full bg-transparent relative">
+        <style>
+          {`
+          @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          @keyframes reverse-spin-slow {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+          }
+          .animate-spin-slow {
+            animation: spin-slow 20s linear infinite;
+          }
+          .animate-reverse-spin-slow {
+            animation: reverse-spin-slow 15s linear infinite;
+          }
+          `}
+        </style>
+        
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative w-40 h-40">
+            <div className="absolute inset-0 rounded-full border-4 border-primary/30 animate-spin-slow"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-secondary/30 animate-reverse-spin-slow" style={{borderRadius: '40%'}}></div>
+            
+            {/* Box */}
+            <div 
+              className="absolute w-12 h-12 bg-primary rounded-lg" 
+              style={{
+                left: 'calc(50% - 24px)',
+                top: 'calc(50% - 70px)',
+                transform: 'rotate(45deg)',
+                animation: 'spin-slow 15s linear infinite'
+              }}
+            ></div>
+            
+            {/* Sphere */}
+            <div 
+              className="absolute w-12 h-12 bg-blue-500 rounded-full" 
+              style={{
+                left: 'calc(50% + 30px)',
+                top: 'calc(50% - 6px)',
+                animation: 'reverse-spin-slow 12s linear infinite'
+              }}
+            ></div>
+            
+            {/* Torus (simulated with a circle with border) */}
+            <div 
+              className="absolute w-14 h-14 rounded-full border-4 border-purple-500" 
+              style={{
+                left: 'calc(50% - 50px)',
+                top: 'calc(50% - 6px)',
+                transform: 'rotate(30deg)',
+                animation: 'spin-slow 18s linear infinite'
+              }}
+            ></div>
           </div>
         </div>
       </div>
-      
-      <style jsx>{`
-        .transform-style-3d {
-          transform-style: preserve-3d;
-        }
-        
-        .transform {
-          transform: translateZ(0);
-        }
-        
-        .translate-z-16 {
-          transform: translateZ(16px);
-        }
-        
-        .-translate-z-16 {
-          transform: translateZ(-16px);
-        }
-        
-        .rotate-y-90 {
-          transform: rotateY(90deg);
-        }
-        
-        .-rotate-y-90 {
-          transform: rotateY(-90deg);
-        }
-        
-        .rotate-x-90 {
-          transform: rotateX(90deg);
-        }
-        
-        .-rotate-x-90 {
-          transform: rotateX(-90deg);
-        }
-      `}</style>
     </div>
   );
 }

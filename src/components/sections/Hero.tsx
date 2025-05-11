@@ -10,7 +10,7 @@ import {
   DialogTitle, 
   DialogTrigger 
 } from "@/components/ui/dialog";
-import { Package, Layout, Smartphone } from "lucide-react";
+import { Package, Layout, Smartphone, Link as LinkIcon } from "lucide-react";
 import HeroScene from "@/components/3d/HeroScene";
 
 export function Hero() {
@@ -58,7 +58,7 @@ export function Hero() {
                   </Button>
                   <Button className="flex justify-start gap-3 h-auto py-4" variant="outline" asChild>
                     <Link to="/websites">
-                      <Package className="h-5 w-5" />
+                      <LinkIcon className="h-5 w-5" />
                       <div className="flex flex-col items-start">
                         <span className="font-medium">Buy Websites</span>
                         <span className="text-sm text-muted-foreground">Ready-to-use website solutions</span>
@@ -77,33 +77,12 @@ export function Hero() {
                 </div>
               </DialogContent>
             </Dialog>
-            <Button size="lg" variant="outline" className="font-medium">
-              Book a demo
+            <Button size="lg" variant="outline" className="font-medium" asChild>
+              <Link to="/websites">Browse websites</Link>
             </Button>
           </div>
           
           <div className="mt-16 relative">
-            <style>
-              {`
-              @keyframes spin-slow {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-              }
-              @keyframes reverse-spin-slow {
-                from { transform: rotate(360deg); }
-                to { transform: rotate(0deg); }
-              }
-              .animate-spin-slow {
-                animation: spin-slow 20s linear infinite;
-              }
-              .animate-reverse-spin-slow {
-                animation: reverse-spin-slow 15s linear infinite;
-              }
-              .perspective-1000 {
-                perspective: 1000px;
-              }
-              `}
-            </style>
             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10 bottom-0 h-20" />
             <HeroScene />
           </div>
