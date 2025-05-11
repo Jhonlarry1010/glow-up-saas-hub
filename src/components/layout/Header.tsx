@@ -28,7 +28,7 @@ export function Header() {
             <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors">Pricing</Link>
             <Link to="/websites" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
               <LinkIcon size={16} />
-              Websites
+              Sites
             </Link>
             <Link to="/#testimonials" className="text-sm font-medium hover:text-primary transition-colors">Testimonials</Link>
           </div>
@@ -36,7 +36,7 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost" size="sm">Log in</Button>
             <Button size="sm" asChild>
-              <Link to="/websites">Buy website</Link>
+              <Link to="/websites">Buy</Link>
             </Button>
           </div>
 
@@ -58,13 +58,13 @@ export function Header() {
               <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors py-2">Pricing</Link>
               <Link to="/websites" className="text-sm font-medium hover:text-primary transition-colors py-2 flex items-center gap-1">
                 <LinkIcon size={16} />
-                Websites
+                Sites
               </Link>
               <Link to="/#testimonials" className="text-sm font-medium hover:text-primary transition-colors py-2">Testimonials</Link>
               <div className="flex flex-col space-y-2 pt-2">
                 <Button variant="ghost" size="sm" className="justify-center">Log in</Button>
                 <Button size="sm" className="justify-center" asChild>
-                  <Link to="/websites">Buy website</Link>
+                  <Link to="/websites">Buy</Link>
                 </Button>
               </div>
             </div>

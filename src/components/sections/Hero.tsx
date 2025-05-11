@@ -60,8 +60,8 @@ export function Hero() {
                     <Link to="/websites">
                       <LinkIcon className="h-5 w-5" />
                       <div className="flex flex-col items-start">
-                        <span className="font-medium">Buy Websites</span>
-                        <span className="text-sm text-muted-foreground">Ready-to-use website solutions</span>
+                        <span className="font-medium">Buy Sites</span>
+                        <span className="text-sm text-muted-foreground">Ready-to-use site solutions</span>
                       </div>
                     </Link>
                   </Button>
@@ -78,7 +78,7 @@ export function Hero() {
               </DialogContent>
             </Dialog>
             <Button size="lg" variant="outline" className="font-medium" asChild>
-              <Link to="/websites">Browse websites</Link>
+              <Link to="/websites">Browse sites</Link>
             </Button>
           </div>
           
