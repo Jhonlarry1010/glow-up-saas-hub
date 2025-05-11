@@ -25,7 +25,7 @@ const websites = [
     price: 299,
     rating: 4.9,
     sales: 320,
-    demo: "https://example.com/demo/business",
+    demo: "https://lovabl.netlify.app/",
     features: ["Contact Form", "Team Profiles", "Service Listings", "Testimonials"]
   },
   {
