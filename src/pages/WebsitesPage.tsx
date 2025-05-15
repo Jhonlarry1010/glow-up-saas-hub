@@ -26,8 +26,7 @@ const websites = [
     rating: 4.9,
     sales: 320,
     demo: "https://lovabl.netlify.app/",
-    sourcecode:"https://lovable.dev/projects/35aa4663-b041-4b66-b1dd-b36a8b92f651/",
-    features: ["Contact Form", "Team Profiles", "Service Listings", "Testimonials"]
+   features: ["Contact Form", "Team Profiles", "Service Listings", "Testimonials"]
   },
   {
     id: 2,
