@@ -41,6 +41,18 @@ const websites = [
     features: ["Project Gallery", "Skills Section", "Resume Download", "Blog Integration"]
   },
   {
+    id: 1,
+    title: "Cartwheel Business",
+    category: "Business",
+    description: "A professional business website template with team profiles, services, and contact forms.",
+    image: "https://media.macphun.com/img/uploads/customer/blog/2103/1684418771646630d3a2bb60.04823118.jpg?q=85&w=840",
+    price: 299,
+    rating: 4.9,
+    sales: 320,
+    demo: "https://lovabl.netlify.app/",
+    features: ["Contact Form", "Team Profiles", "Service Listings", "Testimonials"]
+  },
+  {
     id: 3,
     title: "Cartwheel Store",
     category: "E-commerce",
