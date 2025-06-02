@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/ui/Container";
@@ -12,7 +11,9 @@ import {
   CardTitle, 
   CardDescription 
 } from "@/components/ui/card";
-import { Eye, Package, ArrowRight, Star, Link } from "lucide-react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Eye, Package, ArrowRight, Star, Link, Palette } from "lucide-react";
+import { useState } from "react";
 
 // Sample website data
 const websites = [
@@ -94,30 +95,104 @@ const websites = [
 const categories = ["All", "Business", "Personal", "E-commerce", "Food & Beverage", "Events", "Real Estate"];
 
 const WebsitesPage = () => {
+  const [theme, setTheme] = useState("rainbow");
+
+  const getBackgroundClasses = () => {
+    switch (theme) {
+      case "dark":
+        return "bg-gradient-to-br from-gray-900 via-gray-800 to-black";
+      case "monochrome":
+        return "bg-gradient-to-br from-white via-gray-100 to-gray-200";
+      default:
+        return "bg-gradient-to-br from-purple-400 via-pink-500 via-red-500 via-yellow-500 via-green-500 via-blue-500 to-indigo-600";
+    }
+  };
+
+  const getTextClasses = () => {
+    switch (theme) {
+      case "monochrome":
+        return {
+          primary: "text-gray-900",
+          secondary: "text-gray-700",
+          muted: "text-gray-600"
+        };
+      default:
+        return {
+          primary: "text-white",
+          secondary: "text-white/90",
+          muted: "text-white/80"
+        };
+    }
+  };
+
+  const getCardClasses = () => {
+    switch (theme) {
+      case "dark":
+        return "bg-gray-800/80 backdrop-blur-md border-gray-700/50 hover:bg-gray-700/80";
+      case "monochrome":
+        return "bg-white/90 backdrop-blur-md border-gray-300/50 hover:bg-white";
+      default:
+        return "bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15";
+    }
+  };
+
+  const getButtonClasses = () => {
+    switch (theme) {
+      case "dark":
+        return "bg-gray-700/80 hover:bg-gray-600/80 text-white border-gray-600/50";
+      case "monochrome":
+        return "bg-gray-200/80 hover:bg-gray-300/80 text-gray-900 border-gray-400/50";
+      default:
+        return "bg-white/20 hover:bg-white/30 text-white border-white/30";
+    }
+  };
+
+  const textColors = getTextClasses();
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-400 via-pink-500 via-red-500 via-yellow-500 via-green-500 via-blue-500 to-indigo-600">
+    <div className={`min-h-screen flex flex-col ${getBackgroundClasses()}`}>
       <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px]" />
       <div className="relative z-10">
         <Header />
         <main className="flex-grow">
           <section className="py-16 md:py-24 relative overflow-hidden">
-            {/* Enhanced background decoration with rainbow elements */}
-            <div className="absolute inset-0 -z-10 overflow-hidden">
-              <div className="absolute top-0 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-400 to-pink-400 opacity-20 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-gradient-to-r from-blue-400 to-cyan-400 opacity-20 rounded-full blur-3xl animate-pulse delay-1000" />
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-yellow-400 to-orange-400 opacity-15 rounded-full blur-3xl animate-pulse delay-500" />
-            </div>
+            {/* Theme-specific background decoration */}
+            {theme === "rainbow" && (
+              <div className="absolute inset-0 -z-10 overflow-hidden">
+                <div className="absolute top-0 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-400 to-pink-400 opacity-20 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-gradient-to-r from-blue-400 to-cyan-400 opacity-20 rounded-full blur-3xl animate-pulse delay-1000" />
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-yellow-400 to-orange-400 opacity-15 rounded-full blur-3xl animate-pulse delay-500" />
+              </div>
+            )}
             
             <Container>
               <div className="max-w-3xl mx-auto text-center mb-16">
-                <Badge className="mb-6 bg-white/20 backdrop-blur-sm border-white/30 text-white">Ready-to-Use Websites</Badge>
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-white drop-shadow-lg">
-                  Professional <span className="bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent">Websites</span> For Your Business
+                <Badge className={`mb-6 ${getButtonClasses()}`}>Ready-to-Use Websites</Badge>
+                <h1 className={`text-4xl md:text-5xl font-bold tracking-tight mb-6 ${textColors.primary} drop-shadow-lg`}>
+                  Professional <span className={theme === "monochrome" ? "bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent" : "bg-gradient-to-r from-yellow-200 to-pink-200 bg-clip-text text-transparent"}>Websites</span> For Your Business
                 </h1>
-                <p className="text-lg md:text-xl text-white/90 drop-shadow-md">
+                <p className={`text-lg md:text-xl ${textColors.secondary} drop-shadow-md`}>
                   Launch your online presence in minutes with our professionally designed, 
                   fully functional websites. Just add your content and go live!
                 </p>
+              </div>
+
+              {/* Theme Toggle */}
+              <div className="flex justify-center mb-8">
+                <div className="flex items-center gap-3">
+                  <Palette className={`w-5 h-5 ${textColors.muted}`} />
+                  <ToggleGroup type="single" value={theme} onValueChange={(value) => value && setTheme(value)}>
+                    <ToggleGroupItem value="rainbow" className={getButtonClasses()}>
+                      Rainbow
+                    </ToggleGroupItem>
+                    <ToggleGroupItem value="dark" className={getButtonClasses()}>
+                      Dark
+                    </ToggleGroupItem>
+                    <ToggleGroupItem value="monochrome" className={getButtonClasses()}>
+                      B&W
+                    </ToggleGroupItem>
+                  </ToggleGroup>
+                </div>
               </div>
               
               {/* Filtering options */}
@@ -127,10 +202,7 @@ const WebsitesPage = () => {
                     key={category} 
                     variant={category === "All" ? "default" : "outline"} 
                     size="sm"
-                    className={category === "All" 
-                      ? "bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30" 
-                      : "bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20"
-                    }
+                    className={category === "All" ? getButtonClasses() : `${getButtonClasses()} opacity-70`}
                   >
                     {category}
                   </Button>
@@ -140,7 +212,7 @@ const WebsitesPage = () => {
               {/* Websites grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {websites.map((website) => (
-                  <Card key={website.id} className="overflow-hidden bg-white/10 backdrop-blur-md border-white/20 hover:shadow-xl hover:bg-white/15 transition-all duration-300">
+                  <Card key={website.id} className={`overflow-hidden ${getCardClasses()} transition-all duration-300`}>
                     <div className="aspect-[16/9] overflow-hidden relative group">
                       <img 
                         src={website.image} 
@@ -152,39 +224,39 @@ const WebsitesPage = () => {
                           <Eye className="w-4 h-4 mr-2" /> Live Preview
                         </Button>
                       </div>
-                      <Badge className="absolute top-3 left-3 bg-white/90 text-gray-900">{website.category}</Badge>
+                      <Badge className={`absolute top-3 left-3 ${theme === "monochrome" ? "bg-gray-800/90 text-white" : "bg-white/90 text-gray-900"}`}>{website.category}</Badge>
                     </div>
                     
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
-                          <CardTitle className="text-xl text-white">{website.title}</CardTitle>
-                          <CardDescription className="mt-1 line-clamp-2 text-white/80">{website.description}</CardDescription>
+                          <CardTitle className={`text-xl ${textColors.primary}`}>{website.title}</CardTitle>
+                          <CardDescription className={`mt-1 line-clamp-2 ${textColors.secondary}`}>{website.description}</CardDescription>
                         </div>
-                        <span className="text-lg font-bold text-white">${website.price}</span>
+                        <span className={`text-lg font-bold ${textColors.primary}`}>${website.price}</span>
                       </div>
                     </CardHeader>
                     
                     <CardContent>
                       <div className="flex flex-wrap gap-2 mb-4">
                         {website.features.map((feature) => (
-                          <Badge key={feature} variant="outline" className="font-normal bg-white/10 border-white/30 text-white/90">{feature}</Badge>
+                          <Badge key={feature} variant="outline" className={`font-normal ${getButtonClasses()}`}>{feature}</Badge>
                         ))}
                       </div>
                     </CardContent>
                     
-                    <CardFooter className="flex justify-between border-t border-white/20 pt-4">
+                    <CardFooter className={`flex justify-between border-t ${theme === "monochrome" ? "border-gray-300/50" : "border-white/20"} pt-4`}>
                       <div className="flex items-center gap-3">
                         <div className="flex items-center">
                           <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 mr-1" />
-                          <span className="text-sm text-white/90">{website.rating}</span>
+                          <span className={`text-sm ${textColors.secondary}`}>{website.rating}</span>
                         </div>
                         <div className="flex items-center">
-                          <Link className="w-4 h-4 text-white/70 mr-1" />
-                          <span className="text-sm text-white/70">{website.sales} sales</span>
+                          <Link className={`w-4 h-4 ${textColors.muted} mr-1`} />
+                          <span className={`text-sm ${textColors.muted}`}>{website.sales} sales</span>
                         </div>
                       </div>
-                      <Button size="sm" className="gap-1 bg-white/20 hover:bg-white/30 text-white border-white/30">
+                      <Button size="sm" className={`gap-1 ${getButtonClasses()}`}>
                         Buy now <ArrowRight className="w-3 h-3" />
                       </Button>
                     </CardFooter>
@@ -193,11 +265,11 @@ const WebsitesPage = () => {
               </div>
               
               {/* CTA Section */}
-              <div className="mt-16 p-8 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-center">
-                <Package className="w-12 h-12 mx-auto mb-4 text-white" />
-                <h2 className="text-2xl font-bold mb-4 text-white">Need a custom website?</h2>
-                <p className="text-white/80 mb-6">Our team can build a fully customized website tailored to your specific business needs.</p>
-                <Button className="bg-white/20 hover:bg-white/30 text-white border-white/30">Get a custom quote</Button>
+              <div className={`mt-16 p-8 rounded-xl ${getCardClasses()} text-center`}>
+                <Package className={`w-12 h-12 mx-auto mb-4 ${textColors.primary}`} />
+                <h2 className={`text-2xl font-bold mb-4 ${textColors.primary}`}>Need a custom website?</h2>
+                <p className={`${textColors.secondary} mb-6`}>Our team can build a fully customized website tailored to your specific business needs.</p>
+                <Button className={getButtonClasses()}>Get a custom quote</Button>
               </div>
             </Container>
           </section>
