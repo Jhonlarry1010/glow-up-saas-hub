@@ -12,8 +12,13 @@ import {
 } from "@/components/ui/dialog";
 import { Package, Layout, Smartphone, Link as LinkIcon } from "lucide-react";
 import HeroScene from "@/components/3d/HeroScene";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export function Hero() {
+  const { getTextClasses } = useTheme();
+  const textColors = getTextClasses();
+
   return (
     <section className="py-20 md:py-32 relative overflow-hidden">
       {/* Background decoration */}
@@ -23,14 +28,19 @@ export function Hero() {
       </div>
       
       <Container>
+        {/* Theme Toggle */}
+        <div className="flex justify-center mb-8">
+          <ThemeToggle />
+        </div>
+
         <div className="max-w-3xl mx-auto text-center">
           <Badge className="mb-6">New Features Available</Badge>
           
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+          <h1 className={`text-4xl md:text-6xl font-bold tracking-tight mb-6 ${textColors.primary}`}>
             Streamline Your Workflow with <span className="gradient-text">Cartwheel</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground mb-10">
+          <p className={`text-lg md:text-xl mb-10 ${textColors.secondary}`}>
             Boost productivity and simplify collaboration with our all-in-one platform.
             Get more done with fewer tools and less hassle.
           </p>
