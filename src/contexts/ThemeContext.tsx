@@ -46,6 +46,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const getTextClasses = () => {
     switch (theme) {
+      case 'dark':
+        return {
+          primary: 'text-white',
+          secondary: 'text-blue-400',
+          muted: 'text-blue-300'
+        };
       case 'monochrome':
         return {
           primary: 'text-gray-900',
