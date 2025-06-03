@@ -14,9 +14,6 @@ export const ThemeToggle = () => {
         <ToggleGroupItem value="rainbow" className={getButtonClasses()}>
           Rainbow
         </ToggleGroupItem>
-        <ToggleGroupItem value="dark" className={getButtonClasses()}>
-          Dark
-        </ToggleGroupItem>
         <ToggleGroupItem value="monochrome" className={getButtonClasses()}>
           B&W
         </ToggleGroupItem>

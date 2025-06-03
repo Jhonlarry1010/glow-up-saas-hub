@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-type Theme = 'rainbow' | 'dark' | 'monochrome';
+type Theme = 'rainbow' | 'monochrome';
 
 interface ThemeContextType {
   theme: Theme;
@@ -35,8 +35,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const getBackgroundClasses = () => {
     switch (theme) {
-      case 'dark':
-        return 'bg-gradient-to-br from-gray-900 via-gray-800 to-black';
       case 'monochrome':
         return 'bg-gradient-to-br from-white via-gray-100 to-gray-200';
       default:
@@ -46,12 +44,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const getTextClasses = () => {
     switch (theme) {
-      case 'dark':
-        return {
-          primary: 'text-white',
-          secondary: 'text-blue-400',
-          muted: 'text-blue-300'
-        };
       case 'monochrome':
         return {
           primary: 'text-gray-900',
@@ -69,8 +61,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const getCardClasses = () => {
     switch (theme) {
-      case 'dark':
-        return 'bg-gray-800/80 backdrop-blur-md border-gray-700/50 hover:bg-gray-700/80';
       case 'monochrome':
         return 'bg-white/90 backdrop-blur-md border-gray-300/50 hover:bg-white';
       default:
@@ -80,8 +70,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const getButtonClasses = () => {
     switch (theme) {
-      case 'dark':
-        return 'bg-gray-700/80 hover:bg-gray-600/80 text-white border-gray-600/50';
       case 'monochrome':
         return 'bg-gray-200/80 hover:bg-gray-300/80 text-gray-900 border-gray-400/50';
       default:
