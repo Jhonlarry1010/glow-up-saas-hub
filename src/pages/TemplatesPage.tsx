@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/ui/Container";
@@ -12,6 +12,7 @@ import {
   CardTitle, 
   CardDescription 
 } from "@/components/ui/card";
+import { SearchInput } from "@/components/ui/SearchInput";
 import { Eye, Code, ArrowRight, Star, Layout, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -89,6 +90,20 @@ const templates = [
 const categories = ["All", "Marketing", "Web App", "E-commerce", "Content", "Personal"];
 
 const TemplatesPage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Filter templates based on search query and category
+  const filteredTemplates = templates.filter((template) => {
+    const matchesSearch = template.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         template.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         template.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesCategory = selectedCategory === "All" || template.category === selectedCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -112,22 +127,43 @@ const TemplatesPage = () => {
               </p>
             </div>
             
+            {/* Search input */}
+            <div className="max-w-md mx-auto mb-8">
+              <SearchInput
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="Search templates..."
+                className="w-full"
+              />
+            </div>
+            
             {/* Filtering options */}
             <div className="flex flex-wrap gap-3 mb-10 justify-center">
               {categories.map((category) => (
                 <Button 
                   key={category} 
-                  variant={category === "All" ? "default" : "outline"} 
+                  variant={category === selectedCategory ? "default" : "outline"} 
                   size="sm"
+                  onClick={() => setSelectedCategory(category)}
                 >
                   {category}
                 </Button>
               ))}
             </div>
             
+            {/* Results count */}
+            {searchQuery && (
+              <div className="text-center mb-6">
+                <p className="text-muted-foreground">
+                  Found {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} 
+                  {searchQuery && ` for "${searchQuery}"`}
+                </p>
+              </div>
+            )}
+            
             {/* Templates grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {templates.map((template) => (
+              {filteredTemplates.map((template) => (
                 <Card key={template.id} className="overflow-hidden border-border/60 hover:shadow-md transition-shadow">
                   <div className="aspect-[16/9] overflow-hidden relative group">
                     <img 
@@ -184,6 +220,16 @@ const TemplatesPage = () => {
                 </Card>
               ))}
             </div>
+            
+            {/* No results message */}
+            {filteredTemplates.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-lg text-muted-foreground mb-4">No templates found</p>
+                <p className="text-sm text-muted-foreground">
+                  Try adjusting your search terms or category filter
+                </p>
+              </div>
+            )}
             
             {/* CTA Section */}
             <div className="mt-16 p-8 rounded-xl bg-gradient-to-r from-primary/10 to-secondary/10 text-center">

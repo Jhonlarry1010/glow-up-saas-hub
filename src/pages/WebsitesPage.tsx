@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/ui/Container";
@@ -11,6 +12,7 @@ import {
   CardTitle, 
   CardDescription 
 } from "@/components/ui/card";
+import { SearchInput } from "@/components/ui/SearchInput";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Eye, Package, ArrowRight, Star, Link } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -98,6 +100,19 @@ const categories = ["All", "Business", "Personal", "E-commerce", "Food & Beverag
 const WebsitesPage = () => {
   const { theme, getTextClasses, getCardClasses, getButtonClasses } = useTheme();
   const textColors = getTextClasses();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Filter websites based on search query and category
+  const filteredWebsites = websites.filter((website) => {
+    const matchesSearch = website.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         website.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         website.features.some(feature => feature.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesCategory = selectedCategory === "All" || website.category === selectedCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -129,24 +144,45 @@ const WebsitesPage = () => {
             <div className="flex justify-center mb-8">
               <ThemeToggle />
             </div>
+
+            {/* Search input */}
+            <div className="max-w-md mx-auto mb-8">
+              <SearchInput
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="Search websites..."
+                className="w-full"
+              />
+            </div>
             
             {/* Filtering options */}
             <div className="flex flex-wrap gap-3 mb-10 justify-center">
               {categories.map((category) => (
                 <Button 
                   key={category} 
-                  variant={category === "All" ? "default" : "outline"} 
+                  variant={category === selectedCategory ? "default" : "outline"} 
                   size="sm"
-                  className={category === "All" ? getButtonClasses() : `${getButtonClasses()} opacity-70`}
+                  className={category === selectedCategory ? getButtonClasses() : `${getButtonClasses()} opacity-70`}
+                  onClick={() => setSelectedCategory(category)}
                 >
                   {category}
                 </Button>
               ))}
             </div>
+
+            {/* Results count */}
+            {searchQuery && (
+              <div className="text-center mb-6">
+                <p className={textColors.secondary}>
+                  Found {filteredWebsites.length} website{filteredWebsites.length !== 1 ? 's' : ''} 
+                  {searchQuery && ` for "${searchQuery}"`}
+                </p>
+              </div>
+            )}
             
             {/* Websites grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {websites.map((website) => (
+              {filteredWebsites.map((website) => (
                 <Card key={website.id} className={`overflow-hidden ${getCardClasses()} transition-all duration-300`}>
                   <div className="aspect-[16/9] overflow-hidden relative group">
                     <img 
@@ -200,6 +236,16 @@ const WebsitesPage = () => {
                 </Card>
               ))}
             </div>
+
+            {/* No results message */}
+            {filteredWebsites.length === 0 && (
+              <div className="text-center py-12">
+                <p className={`text-lg ${textColors.secondary} mb-4`}>No websites found</p>
+                <p className={`text-sm ${textColors.muted}`}>
+                  Try adjusting your search terms or category filter
+                </p>
+              </div>
+            )}
             
             {/* CTA Section */}
             <div className={`mt-16 p-8 rounded-xl ${getCardClasses()} text-center`}>
