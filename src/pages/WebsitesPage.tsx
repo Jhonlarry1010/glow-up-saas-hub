@@ -14,6 +14,7 @@ import {
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Eye, Package, ArrowRight, Star, Link } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
+import { Link as RouterLink } from "react-router-dom";
 
 // Sample website data
 const websites = [
@@ -27,7 +28,7 @@ const websites = [
     rating: 4.9,
     sales: 320,
     demo: "https://lovabl.netlify.app/",
-   features: ["Contact Form", "Team Profiles", "Service Listings", "Testimonials"]
+    features: ["Contact Form", "Team Profiles", "Service Listings", "Testimonials"]
   },
   {
     id: 2,
@@ -190,8 +191,10 @@ const WebsitesPage = () => {
                         <span className={`text-sm ${textColors.muted}`}>{website.sales} sales</span>
                       </div>
                     </div>
-                    <Button size="sm" className={`gap-1 ${getButtonClasses()}`}>
-                      Buy now <ArrowRight className="w-3 h-3" />
+                    <Button size="sm" className={`gap-1 ${getButtonClasses()}`} asChild>
+                      <RouterLink to={`/checkout?title=${encodeURIComponent(website.title)}&price=${website.price}&type=website&category=${encodeURIComponent(website.category)}`}>
+                        Buy now <ArrowRight className="w-3 h-3" />
+                      </RouterLink>
                     </Button>
                   </CardFooter>
                 </Card>

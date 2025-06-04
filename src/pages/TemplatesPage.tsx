@@ -175,8 +175,10 @@ const TemplatesPage = () => {
                         <span className="text-sm text-muted-foreground">{template.downloads}</span>
                       </div>
                     </div>
-                    <Button size="sm" className="gap-1">
-                      Buy now <ArrowRight className="w-3 h-3" />
+                    <Button size="sm" className="gap-1" asChild>
+                      <Link to={`/checkout?title=${encodeURIComponent(template.title)}&price=${template.price}&type=template&category=${encodeURIComponent(template.category)}`}>
+                        Buy now <ArrowRight className="w-3 h-3" />
+                      </Link>
                     </Button>
                   </CardFooter>
                 </Card>

@@ -11,6 +11,7 @@ import GetStarted from "./pages/GetStarted";
 import NotFound from "./pages/NotFound";
 import TemplatesPage from "./pages/TemplatesPage";
 import WebsitesPage from "./pages/WebsitesPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const AppContent = () => {
             <Route path="/templates" element={<TemplatesPage />} />
             <Route path="/websites" element={<WebsitesPage />} />
             <Route path="/apps" element={<GetStarted />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
