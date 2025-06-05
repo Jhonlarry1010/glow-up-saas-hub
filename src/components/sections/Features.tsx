@@ -96,7 +96,7 @@ export function Features() {
             <div className="lg:w-1/2">
               <div className="rounded-lg border border-border/80 shadow-lg overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" 
+                  src="https://as2.ftcdn.net/v2/jpg/05/91/16/23/1000_F_591162376_hC0rOhlcSP3DMlwLt1CcTV1n8xXYHaSr.jpg" 
                   alt="Product Dashboard" 
                   className="w-full h-auto"
                 />
