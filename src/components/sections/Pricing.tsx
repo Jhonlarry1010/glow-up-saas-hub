@@ -10,9 +10,9 @@ const pricingPlans = [
     price: 10,
     description: "Perfect for individuals and small teams",
     features: [
-      "unlimited templates"
-      "only one user"
-   ],
+      "Unlimited templates",
+      "Only one user"
+    ],
     cta: "Start with Starter",
     highlight: false,
   },
