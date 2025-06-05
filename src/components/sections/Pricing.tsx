@@ -7,14 +7,17 @@ import { Badge } from "@/components/ui/badge";
 const pricingPlans = [
   {
     name: "Starter",
-    price: 29,
+    price: 10,
     description: "Perfect for individuals and small teams",
     features: [
-      "Up to 5 users",
-      "10GB storage",
-      "Basic analytics",
-      "24/7 email support",
-      "API access"
+      "unlimited templates"
+      "only one user"
+
+
+
+
+
+      
     ],
     cta: "Start with Starter",
     highlight: false,
