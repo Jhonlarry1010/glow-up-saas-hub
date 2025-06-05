@@ -12,13 +12,7 @@ const pricingPlans = [
     features: [
       "unlimited templates"
       "only one user"
-
-
-
-
-
-      
-    ],
+   ],
     cta: "Start with Starter",
     highlight: false,
   },
